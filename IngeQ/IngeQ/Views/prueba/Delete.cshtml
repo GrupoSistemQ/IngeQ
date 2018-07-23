@@ -1,0 +1,73 @@
+﻿@model IngeQ.Models.programas
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>programas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NOMBRE_PROGRAMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMBRE_PROGRAMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_INICIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_INICIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FECHA_TERMINO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FECHA_TERMINO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ESTADO_PROGRAMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ESTADO_PROGRAMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CAPACIDAD_PROGRAMA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CAPACIDAD_PROGRAMA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CANTIDAD_CLASES)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CANTIDAD_CLASES)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
