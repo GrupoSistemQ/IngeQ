@@ -1,14 +1,14 @@
-﻿@model IEnumerable<IngeQ.Models.programas>
+﻿@model IEnumerable<IngeQ.Models.PROGRAMAS>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Listado de programas</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Agregar programa", "Create")
 </p>
 <table class="table">
     <tr>
@@ -54,9 +54,8 @@
             @Html.DisplayFor(modelItem => item.CANTIDAD_CLASES)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_PROGRAMA }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_PROGRAMA }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_PROGRAMA })
+            @Html.ActionLink("Editar", "Edit", new { id=item.ID_PROGRAMA }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.ID_PROGRAMA })
         </td>
     </tr>
 }

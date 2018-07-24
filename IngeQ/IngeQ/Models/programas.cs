@@ -13,29 +13,31 @@ namespace IngeQ.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public partial class programas
+    public partial class PROGRAMAS
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public programas()
+        public PROGRAMAS()
         {
-            this.beneficiarios = new HashSet<beneficiarios>();
+            this.BENEFICIARIOS = new HashSet<BENEFICIARIOS>();
         }
         [Display(Name = "Codigo")]
         public string ID_PROGRAMA { get; set; }
         [Display(Name = "Nombre")]
         public string NOMBRE_PROGRAMA { get; set; }
+        [DataType(DataType.Date)]
         [Display(Name = "Inicio")]
         public Nullable<System.DateTime> FECHA_INICIO { get; set; }
+        [DataType(DataType.Date)]
         [Display(Name = "Termino")]
         public Nullable<System.DateTime> FECHA_TERMINO { get; set; }
         [Display(Name = "Estado")]
         public string ESTADO_PROGRAMA { get; set; }
         [Display(Name = "Capacidad")]
         public Nullable<int> CAPACIDAD_PROGRAMA { get; set; }
-        [Display(Name = "Cantidad de clases")]
+        [Display(Name = "Clases")]
         public Nullable<int> CANTIDAD_CLASES { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<beneficiarios> beneficiarios { get; set; }
+        public virtual ICollection<BENEFICIARIOS> BENEFICIARIOS { get; set; }
     }
 }

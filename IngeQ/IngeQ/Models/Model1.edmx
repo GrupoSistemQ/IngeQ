@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_A3E8FF_ingeqsqlModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BENEFICIARIOS">
+          <Key>
+            <PropertyRef Name="B_RUT" />
+          </Key>
+          <Property Name="B_RUT" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="ID_PROGRAMA" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="B_NOMBRES" Type="varchar" MaxLength="50" />
+          <Property Name="B__APELLIDOS" Type="varchar" MaxLength="50" />
+          <Property Name="B_TELEFONO" Type="char" MaxLength="15" />
+          <Property Name="B_ALT_CONTACTO" Type="varchar" MaxLength="50" />
+          <Property Name="B_CURSO_APROBADO" Type="varchar" MaxLength="1250" />
+        </EntityType>
+        <EntityType Name="PROGRAMAS">
+          <Key>
+            <PropertyRef Name="ID_PROGRAMA" />
+          </Key>
+          <Property Name="ID_PROGRAMA" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NOMBRE_PROGRAMA" Type="varchar" MaxLength="100" />
+          <Property Name="FECHA_INICIO" Type="datetime" />
+          <Property Name="FECHA_TERMINO" Type="datetime" />
+          <Property Name="ESTADO_PROGRAMA" Type="varchar" MaxLength="20" />
+          <Property Name="CAPACIDAD_PROGRAMA" Type="int" />
+          <Property Name="CANTIDAD_CLASES" Type="int" />
+        </EntityType>
+        <Association Name="FK_BENEFICI_PERTENECE_PROGRAMA">
+          <End Role="PROGRAMAS" Type="Self.PROGRAMAS" Multiplicity="1" />
+          <End Role="BENEFICIARIOS" Type="Self.BENEFICIARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROGRAMAS">
+              <PropertyRef Name="ID_PROGRAMA" />
+            </Principal>
+            <Dependent Role="BENEFICIARIOS">
+              <PropertyRef Name="ID_PROGRAMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_A3E8FF_ingeqsqlModelStoreContainer">
+          <EntitySet Name="BENEFICIARIOS" EntityType="Self.BENEFICIARIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROGRAMAS" EntityType="Self.PROGRAMAS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BENEFICI_PERTENECE_PROGRAMA" Association="Self.FK_BENEFICI_PERTENECE_PROGRAMA">
+            <End Role="PROGRAMAS" EntitySet="PROGRAMAS" />
+            <End Role="BENEFICIARIOS" EntitySet="BENEFICIARIOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_A3E8FF_ingeqsqlModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BENEFICIARIOS">
+          <Key>
+            <PropertyRef Name="B_RUT" />
+          </Key>
+          <Property Name="B_RUT" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ID_PROGRAMA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="B_NOMBRES" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="B__APELLIDOS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="B_TELEFONO" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="B_ALT_CONTACTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="B_CURSO_APROBADO" Type="String" MaxLength="1250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PROGRAMAS" Relationship="Self.FK_BENEFICI_PERTENECE_PROGRAMA" FromRole="BENEFICIARIOS" ToRole="PROGRAMAS" />
+        </EntityType>
+        <EntityType Name="PROGRAMAS">
+          <Key>
+            <PropertyRef Name="ID_PROGRAMA" />
+          </Key>
+          <Property Name="ID_PROGRAMA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMBRE_PROGRAMA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_INICIO" Type="DateTime" Precision="3" />
+          <Property Name="FECHA_TERMINO" Type="DateTime" Precision="3" />
+          <Property Name="ESTADO_PROGRAMA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CAPACIDAD_PROGRAMA" Type="Int32" />
+          <Property Name="CANTIDAD_CLASES" Type="Int32" />
+          <NavigationProperty Name="BENEFICIARIOS" Relationship="Self.FK_BENEFICI_PERTENECE_PROGRAMA" FromRole="PROGRAMAS" ToRole="BENEFICIARIOS" />
+        </EntityType>
+        <Association Name="FK_BENEFICI_PERTENECE_PROGRAMA">
+          <End Role="PROGRAMAS" Type="Self.PROGRAMAS" Multiplicity="1" />
+          <End Role="BENEFICIARIOS" Type="Self.BENEFICIARIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROGRAMAS">
+              <PropertyRef Name="ID_PROGRAMA" />
+            </Principal>
+            <Dependent Role="BENEFICIARIOS">
+              <PropertyRef Name="ID_PROGRAMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_A3E8FF_ingeqsqlEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BENEFICIARIOS" EntityType="Self.BENEFICIARIOS" />
+          <EntitySet Name="PROGRAMAS" EntityType="Self.PROGRAMAS" />
+          <AssociationSet Name="FK_BENEFICI_PERTENECE_PROGRAMA" Association="Self.FK_BENEFICI_PERTENECE_PROGRAMA">
+            <End Role="PROGRAMAS" EntitySet="PROGRAMAS" />
+            <End Role="BENEFICIARIOS" EntitySet="BENEFICIARIOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_A3E8FF_ingeqsqlModelStoreContainer" CdmEntityContainer="DB_A3E8FF_ingeqsqlEntities">
+          <EntitySetMapping Name="BENEFICIARIOS">
+            <EntityTypeMapping TypeName="DB_A3E8FF_ingeqsqlModel.BENEFICIARIOS">
+              <MappingFragment StoreEntitySet="BENEFICIARIOS">
+                <ScalarProperty Name="B_RUT" ColumnName="B_RUT" />
+                <ScalarProperty Name="ID_PROGRAMA" ColumnName="ID_PROGRAMA" />
+                <ScalarProperty Name="B_NOMBRES" ColumnName="B_NOMBRES" />
+                <ScalarProperty Name="B__APELLIDOS" ColumnName="B__APELLIDOS" />
+                <ScalarProperty Name="B_TELEFONO" ColumnName="B_TELEFONO" />
+                <ScalarProperty Name="B_ALT_CONTACTO" ColumnName="B_ALT_CONTACTO" />
+                <ScalarProperty Name="B_CURSO_APROBADO" ColumnName="B_CURSO_APROBADO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROGRAMAS">
+            <EntityTypeMapping TypeName="DB_A3E8FF_ingeqsqlModel.PROGRAMAS">
+              <MappingFragment StoreEntitySet="PROGRAMAS">
+                <ScalarProperty Name="ID_PROGRAMA" ColumnName="ID_PROGRAMA" />
+                <ScalarProperty Name="NOMBRE_PROGRAMA" ColumnName="NOMBRE_PROGRAMA" />
+                <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+                <ScalarProperty Name="FECHA_TERMINO" ColumnName="FECHA_TERMINO" />
+                <ScalarProperty Name="ESTADO_PROGRAMA" ColumnName="ESTADO_PROGRAMA" />
+                <ScalarProperty Name="CAPACIDAD_PROGRAMA" ColumnName="CAPACIDAD_PROGRAMA" />
+                <ScalarProperty Name="CANTIDAD_CLASES" ColumnName="CANTIDAD_CLASES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

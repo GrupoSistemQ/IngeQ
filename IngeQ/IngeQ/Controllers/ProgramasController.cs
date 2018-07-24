@@ -1,93 +1,127 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IngeQ.Models;
 
 namespace IngeQ.Controllers
 {
-    public class ProgramasController : Controller
+    public class PROGRAMASController : Controller
     {
-        // GET: Programas
+        private DB_A3E8FF_ingeqsqlEntities db = new DB_A3E8FF_ingeqsqlEntities();
+
+        // GET: PROGRAMAS
         public ActionResult Index()
         {
-            db_host_ingeq bd = new db_host_ingeq();
-            List<programas> programas = bd.programas.ToList();
-
-            return View(programas);
+            return View(db.PROGRAMAS.ToList());
         }
 
-        // GET: Programas/Details/5
-        public ActionResult Details(int id)
+        // GET: PROGRAMAS/Details/5
+        public ActionResult Details(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PROGRAMAS pROGRAMAS = db.PROGRAMAS.Find(id);
+            if (pROGRAMAS == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pROGRAMAS);
         }
 
-        // GET: Programas/Create
+        // GET: PROGRAMAS/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Programas/Create
+        // POST: PROGRAMAS/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ID_PROGRAMA,NOMBRE_PROGRAMA,FECHA_INICIO,FECHA_TERMINO,ESTADO_PROGRAMA,CAPACIDAD_PROGRAMA,CANTIDAD_CLASES")] PROGRAMAS pROGRAMAS)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
+                db.PROGRAMAS.Add(pROGRAMAS);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
+
+            return View(pROGRAMAS);
+        }
+
+        // GET: PROGRAMAS/Edit/5
+        public ActionResult Edit(string id)
+        {
+            if (id == null)
             {
-                return View();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-        }
-
-        // GET: Programas/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Programas/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
+            PROGRAMAS pROGRAMAS = db.PROGRAMAS.Find(id);
+            if (pROGRAMAS == null)
             {
-                // TODO: Add update logic here
+                return HttpNotFound();
+            }
+            return View(pROGRAMAS);
+        }
 
+        // POST: PROGRAMAS/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "ID_PROGRAMA,NOMBRE_PROGRAMA,FECHA_INICIO,FECHA_TERMINO,ESTADO_PROGRAMA,CAPACIDAD_PROGRAMA,CANTIDAD_CLASES")] PROGRAMAS pROGRAMAS)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(pROGRAMAS).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(pROGRAMAS);
         }
 
-        // GET: Programas/Delete/5
-        public ActionResult Delete(int id)
+        // GET: PROGRAMAS/Delete/5
+        public ActionResult Delete(string id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            PROGRAMAS pROGRAMAS = db.PROGRAMAS.Find(id);
+            if (pROGRAMAS == null)
+            {
+                return HttpNotFound();
+            }
+            return View(pROGRAMAS);
         }
 
-        // POST: Programas/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        // POST: PROGRAMAS/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            PROGRAMAS pROGRAMAS = db.PROGRAMAS.Find(id);
+            db.PROGRAMAS.Remove(pROGRAMAS);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
-                return RedirectToAction("Index");
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }

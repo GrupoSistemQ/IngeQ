@@ -12,7 +12,7 @@ namespace IngeQ.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class beneficiarios
+    public partial class BENEFICIARIOS
     {
         public string B_RUT { get; set; }
         public string ID_PROGRAMA { get; set; }
@@ -22,6 +22,6 @@ namespace IngeQ.Models
         public string B_ALT_CONTACTO { get; set; }
         public string B_CURSO_APROBADO { get; set; }
     
-        public virtual programas programas { get; set; }
+        public virtual PROGRAMAS PROGRAMAS { get; set; }
     }
 }
